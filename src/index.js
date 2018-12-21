@@ -82,17 +82,21 @@ exports.isValidXML = xmlString => {
     // console.log(tagStack);
     let lastTag = "";
     let tagStr = "";
+    let tagCategories = [];
+    let tagStackSize = tagStack.length;
     for (i=0; i < tagStack.length; i++) {
-      lastTag = tagStack.pop()
-      tagStr = tagStr + (lastTag);
-    }
-    console.log(tagStr);
 
-    if(tagStr.match("aa") || tagStr.match("abcd")) {
-      return false;
+      popedTag = tagStack.pop()
+
+      if(tagStackSize > 2 && popedTag == lastTag) {
+        return false;
+      }
+
+      lastTag = popedTag;
+
+      // console.log(tagStackSize, popedTag, lastTag, (tagStackSize > 2 && popedTag == lastTag));
     }
     
-
 
   return true;  
 };
